@@ -9,7 +9,7 @@
 | Khóa/Lớp | K4-L3A |
 | Tên nhóm | DataTitans (Nhóm 3 thành viên: Nhật, Vĩ, Tuấn) |
 | Vai trò chính | **Pipeline Orchestration & Data Foundation Lead (Phụ trách 2 phần việc)** |
-| Repository | `https://github.com/nhatgudboi/K4-L3A-Day10-Data-Pipeline-Data-Observability` |
+| Repository | `https://github.com/nhatgudboi/K4-L3A-DAY10-DataTitans-DataPipeline` |
 | Ngày hoàn thành | 2026-09-25 |
 
 ---

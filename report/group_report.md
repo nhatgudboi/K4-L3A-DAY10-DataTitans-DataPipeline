@@ -6,7 +6,7 @@
 | --- | --- |
 | Khóa/Lớp | K4 |
 | Tên nhóm | **DataTitans** |
-| Repository | `https://github.com/nhatgudboi/K4-L3A-Day10-Data-Pipeline-Data-Observability` |
+| Repository | `https://github.com/nhatgudboi/K4-L3A-DAY10-DataTitans-DataPipeline` |
 | Ngày hoàn thành | 2026-09-25 |
 
 ### Thành viên và phân công
@@ -300,7 +300,7 @@ Mô tả sự cố thực tế phát sinh khi kết nối các module trong pipe
 
 ## 13. Checklist trước khi nộp
 
-- [x] Thông tin nhóm và repository chính xác (`https://github.com/nhatgudboi/K4-L3A-Day10-Data-Pipeline-Data-Observability`).
+- [x] Thông tin nhóm và repository chính xác (`https://github.com/nhatgudboi/K4-L3A-DAY10-DataTitans-DataPipeline`).
 - [x] Phân công khớp với module, artifact và kết quả thực tế trong `docs/TEAM.md`.
 - [x] Lệnh tái hiện đã được chạy lại trên phiên bản dùng để nộp (`python script/run_phase1.py` và `run_corruption_flow.py`).
 - [x] Baseline, corrupted và repaired dùng cùng evaluation set (`data/eval/test_set.json`).

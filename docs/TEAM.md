@@ -2,7 +2,7 @@
 
 - **Tên Nhóm:** `DataTitans`
 - **Mã Nhóm / Lớp:** `K4-L3A-DAY10`
-- **Tên Repository Nộp Bài:** `K4-L3A-Day10-Data-Pipeline-Data-Observability`
+- **Tên Repository Nộp Bài:** `K4-L3A-DAY10-DataTitans-DataPipeline`
 - **Nhánh thực hiện bài nộp:** `main` (100đ chuẩn + 10đ Bonus)
 
 ---
