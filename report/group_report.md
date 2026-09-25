@@ -24,7 +24,7 @@
 Nhóm **DataTitans** đã hoàn thành 100% yêu cầu bài lab Day 10 và triển khai trọn vẹn cả 2 tính năng thưởng nâng cao (Bonus B1: HTML Observability Dashboard và Bonus B2: Automated Self-Healing Pipeline). 
 
 - **Baseline Pipeline:** Thu thập 24 bản ghi học thuật từ Crossref API (kèm cơ chế Fallback offline snapshot tự động), làm sạch và chuẩn hóa text, tính toán `age_days` và `text_for_embedding`, lưu trữ index vào ChromaDB. Trạm kiểm soát chất lượng Great Expectations 1.x và Freshness SLA đều đạt chuẩn tuyệt đối (**PASSED**, **0.0% Stale**). RAG Agent truy vấn đạt **100% Retrieval Hit Rate** và **Mean Token F1 = 1.0000** trên bộ 10 câu hỏi benchmark chuẩn hóa.
-- **Tác động của Corruption:** Thử thách tiêm 6 độc tố dữ liệu có kiểm soát (bỏ 20% bản ghi mới nhất, xóa rỗng abstract, chèn chuỗi rác, cắt ngắn title, lùi ngày xuất bản 365 ngày, nhân bản dòng). Kết quả chứng minh thực nghiệm hiện tượng **Silent Failure**: Code hệ thống vẫn trả về `exit code 0` nhưng **Retrieval Hit Rate sụt giảm nghiêm trọng từ 100% xuống 50%**, và **Mean Token F1 rơi từ 1.0000 xuống 0.6506**. Chốt kiểm soát GX 1.x ngay lập tức báo động **FAILED** (vi phạm 3 Expectation) và Freshness SLA báo động **BREACHED (42.9% Stale)**.
+- **Tác động của Corruption:** Thử thách tiêm 6 độc tố dữ liệu có kiểm soát (bỏ 20% bản ghi mới nhất, xóa rỗng abstract, chèn chuỗi rác, cắt ngắn title, lùi ngày xuất bản 365 ngày, nhân bản dòng). Kết quả chứng minh thực nghiệm hiện tượng **Silent Failure**: Code hệ thống vẫn trả về `exit code 0` nhưng **Retrieval Hit Rate sụt giảm nghiêm trọng từ 100% xuống 50%**, và **Mean Token F1 rơi từ 1.0000 xuống 0.6506**. Chốt kiểm soát GX 1.x ngay lập tức báo động **FAILED** (vi phạm 3 Expectation) và Freshness SLA báo động **BREACHED (58.33% Stale)**.
 - **Mức độ phục hồi sau Repair:** Quy trình tự phục hồi Idempotent Repair tái tạo toàn bộ không gian vector và bảng dữ liệu sạch trực tiếp từ Raw snapshot. Toàn bộ các chỉ số phục hồi 100% về trạng thái hoàn hảo ban đầu (**Hit Rate: 100%**, **F1: 1.0000**, GX 1.x **PASSED**).
 - **Giới hạn quan trọng còn lại:** Pipeline hiện hoạt động theo mô hình Micro-batch định kỳ (24 records/batch) với ngưỡng Freshness tĩnh (180 ngày). Trong môi trường Streaming thực tế, hệ thống cần nâng cấp lên Dynamic Thresholding dựa trên phân phối sliding-window và CDC (Change Data Capture).
 
@@ -266,7 +266,7 @@ Cơ chế tự phục hồi (Repair) của nhóm không dùng các hàm vá lỗ
 | `judge_accuracy` | **100.00%** | **60.00%** | **100.00%** | **-40.00%** | **100.00%** | RAG Agent trả lời sai 4/10 câu hỏi; khôi phục hoàn toàn sau sửa chữa |
 | `mean_judge_score` | **5.00** | **3.50** | **5.00** | **-1.50** | **100.00%** | Điểm số chất lượng suy giảm mạnh khi dữ liệu bị thoái hóa |
 | Quality checks pass/fail | **PASSED** (6/6) | **FAILED** (3/6) | **PASSED** (6/6) | **-3 checks** | **100.00%** | GX 1.x phát hiện ngay vi phạm null, duplicate và độ dài văn bản |
-| Freshness status | **HEALTHY** (0.0% Stale) | **BREACHED** (42.9% Stale) | **HEALTHY** (0.0% Stale) | **+42.9% Stale** | **100.00%** | Hệ thống cảnh báo chính xác khi dữ liệu bị làm cũ nhân tạo |
+| Freshness status | **HEALTHY** (0.0% Stale) | **BREACHED** (58.33% Stale) | **HEALTHY** (0.0% Stale) | **+58.33% Stale** | **100.00%** | Hệ thống cảnh báo chính xác khi dữ liệu bị làm cũ nhân tạo |
 
 ### Hai kết luận nhân quả được hỗ trợ bởi bằng chứng thực nghiệm:
 

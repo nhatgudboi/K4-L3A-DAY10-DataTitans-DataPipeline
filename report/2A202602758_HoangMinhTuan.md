@@ -39,7 +39,7 @@
 | Nhiệm vụ đã thực hiện | File/hàm/artifact liên quan | Kết quả bàn giao | Cách xác minh |
 | --- | --- | --- | --- |
 | Triển khai GX 1.x Quality Gate | `src/observability/quality.py` | Kiểm tra 6 Expectation trên RAM (ephemeral) | Lệnh kiểm tra console in: `Quality check status = True` |
-| Giám sát Freshness SLA | `data/quality/freshness_report.json` | Baseline: 0% Stale (Đạt)<br>Corrupted: 42.9% Stale (Cảnh báo vi phạm) | Kiểm tra thuộc tính `is_fresh` trong report |
+| Giám sát Freshness SLA | `data/quality/freshness_report.json` | Baseline: 0% Stale (Đạt)<br>Corrupted: 58.33% Stale (Cảnh báo vi phạm) | Kiểm tra thuộc tính `is_fresh` trong report |
 | Xuất báo cáo Baseline | `data/reports/phase1_report.md` | Báo cáo chi tiết luồng dữ liệu sạch và kết quả GX | Tồn tại file Markdown đầy đủ tiêu chuẩn |
 | Xuất báo cáo đối chiếu 3 trạng thái | `data/reports/corruption_report.md` | Bảng so sánh 3 cột: Baseline vs Corrupted vs Repaired | Tồn tại bảng so sánh định lượng trực quan |
 
