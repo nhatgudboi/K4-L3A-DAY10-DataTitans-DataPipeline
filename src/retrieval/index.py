@@ -25,20 +25,47 @@ class LocalEmbeddingIndex:
     def __init__(
         self,
         settings: Settings,
-        collection_name: str,
-        documents: list[dict[str, Any]],
-        persist_path: Path,
+        collection_name: str = "papers-baseline",
+        documents: list[dict[str, Any]] | None = None,
+        persist_path: Path | None = None,
     ):
         self.settings = settings
         self.collection_name = collection_name
-        self.documents = documents
-        self.persist_path = persist_path
+        self.documents = documents or []
+        self.persist_path = persist_path or settings.paths.chroma_dir
         self.embedding_backend = "chroma"
         self.embedding_model = MiniLMEmbeddings(settings.embedding_model)
-        self.client = chromadb.PersistentClient(path=str(persist_path))
-        self.collection = self.client.get_collection(name=collection_name)
-        self.documents_by_paper_id = {document["paper_id"].lower(): document for document in documents}
-        self.documents_by_title = {document["title"].lower(): document for document in documents}
+        self.client = chromadb.PersistentClient(path=str(self.persist_path))
+        try:
+            self.collection = self.client.get_collection(name=collection_name)
+        except Exception:
+            self.collection = None
+        self.documents_by_paper_id = {document["paper_id"].lower(): document for document in self.documents}
+        self.documents_by_title = {document["title"].lower(): document for document in self.documents}
+
+    def build_from_clean(self) -> "LocalEmbeddingIndex":
+        """Build Chroma collection from clean dataframe."""
+        if self.settings.paths.clean_json.exists():
+            df = pd.read_json(self.settings.paths.clean_json)
+        elif self.settings.paths.clean_csv.exists():
+            df = pd.read_csv(self.settings.paths.clean_csv)
+        else:
+            from ingestion.cleaning import build_clean_dataframe
+            from ingestion.crossref import fetch_source_records
+            from core.utils import now_utc
+            records = fetch_source_records(self.settings)
+            df = build_clean_dataframe(records, now_utc())
+
+        idx = self.build(df, self.settings, self.settings.paths.embeddings_json)
+        self.documents = idx.documents
+        self.collection = idx.collection
+        self.documents_by_paper_id = idx.documents_by_paper_id
+        self.documents_by_title = idx.documents_by_title
+        return self
+
+    def semantic_search(self, query: str, top_k: int = 4) -> list[SearchResult]:
+        """Perform semantic search using embedding similarity."""
+        return self.search(query, top_k=top_k)
 
     @staticmethod
     def _build_documents(df: pd.DataFrame) -> list[dict[str, Any]]:
