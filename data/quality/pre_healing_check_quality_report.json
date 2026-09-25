@@ -1,0 +1,50 @@
+{
+  "report_name": "pre_healing_check",
+  "timestamp": "2026-09-25T08:51:24.766768+00:00",
+  "total_rows": 24,
+  "all_expectations_passed": false,
+  "is_fresh": false,
+  "success": false,
+  "stale_ratio": 0.5833,
+  "results": [
+    {
+      "expectation_type": "ExpectTableRowCountToBeBetween",
+      "success": true,
+      "kwargs": "id=None meta=None notes=None result_format=<ResultFormat.BASIC: 'BASIC'> description=None catch_exceptions=False rendered_content=None severity=<FailureSeverity.CRITICAL: 'critical'> windows=None batch_id=None min_value=5 max_value=5000 strict_min=False strict_max=False row_condition=None condition_parser=None"
+    },
+    {
+      "expectation_type": "ExpectColumnValuesToNotBeNull",
+      "success": true,
+      "kwargs": "id=None meta=None notes=None result_format=<ResultFormat.BASIC: 'BASIC'> description=None catch_exceptions=True rendered_content=None severity=<FailureSeverity.CRITICAL: 'critical'> windows=None batch_id=None column='paper_id' mostly=1 row_condition=None condition_parser=None"
+    },
+    {
+      "expectation_type": "ExpectColumnValuesToNotBeNull",
+      "success": true,
+      "kwargs": "id=None meta=None notes=None result_format=<ResultFormat.BASIC: 'BASIC'> description=None catch_exceptions=True rendered_content=None severity=<FailureSeverity.CRITICAL: 'critical'> windows=None batch_id=None column='title' mostly=1 row_condition=None condition_parser=None"
+    },
+    {
+      "expectation_type": "ExpectColumnValuesToNotBeNull",
+      "success": true,
+      "kwargs": "id=None meta=None notes=None result_format=<ResultFormat.BASIC: 'BASIC'> description=None catch_exceptions=True rendered_content=None severity=<FailureSeverity.CRITICAL: 'critical'> windows=None batch_id=None column='text_for_embedding' mostly=1 row_condition=None condition_parser=None"
+    },
+    {
+      "expectation_type": "ExpectColumnValuesToBeUnique",
+      "success": false,
+      "kwargs": "id=None meta=None notes=None result_format=<ResultFormat.BASIC: 'BASIC'> description=None catch_exceptions=True rendered_content=None severity=<FailureSeverity.CRITICAL: 'critical'> windows=None batch_id=None column='paper_id' mostly=1 row_condition=None condition_parser=None"
+    },
+    {
+      "expectation_type": "ExpectColumnValueLengthsToBeBetween",
+      "success": true,
+      "kwargs": "id=None meta=None notes=None result_format=<ResultFormat.BASIC: 'BASIC'> description=None catch_exceptions=True rendered_content=None severity=<FailureSeverity.CRITICAL: 'critical'> windows=None batch_id=None column='summary' mostly=1 row_condition=None condition_parser=None min_value=30 max_value=None strict_min=False strict_max=False"
+    }
+  ],
+  "freshness": {
+    "latest_published": "2026-06-05",
+    "oldest_published": "2024-01-01",
+    "stale_rows": 14,
+    "total_rows": 24,
+    "stale_ratio": 0.5833,
+    "freshness_threshold_days": 180,
+    "is_fresh": false
+  }
+}
