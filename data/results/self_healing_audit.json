@@ -1,0 +1,18 @@
+{
+  "timestamp": "2026-09-25T08:51:24.773223+00:00",
+  "status": "HEALED",
+  "action_taken": "IDEMPOTENT_REBUILD_AND_INDEX_SYNC",
+  "anomaly_details": {
+    "initial_quality_success": false,
+    "initial_is_fresh": false,
+    "quarantined_records_count": 24,
+    "quarantine_file": "D:\\K4-L3A-Day10-Data-Pipeline-Data-Observability\\data\\quality\\quarantine_dataset.json"
+  },
+  "resolution_details": {
+    "healed_records_count": 24,
+    "post_healing_dq_success": true,
+    "post_healing_is_fresh": true,
+    "retrieval_hit_rate": 1.0,
+    "mean_token_f1": 1.0
+  }
+}
